@@ -1,0 +1,11 @@
+@media screen and (max-width: 800px), screen and (max-height: 800px), screen and (max-aspect-ratio: 4/3) {
+    .hidden-mobile {
+        visibility: hidden;
+        display: none;
+    }
+}
+
+.content-box {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+}
