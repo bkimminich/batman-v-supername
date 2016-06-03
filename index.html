@@ -107,6 +107,19 @@
             <h1>Intent</h1>
         </section>
 
+        <section>
+            <h2>Can you figure this out?</h2>
+            <pre><code data-trim>
+// ...
+player1.setmenOCom(1);
+player2.setmenOCom(0);
+// ...
+            </code></pre>
+            <div class="fragment">
+                <img data-src="assets/batman-movies-logo-vector.png" style="border: none; box-shadow: none; position: absolute; top: 80px; right: 30px; background: none;">
+            </div>
+        </section>
+
         <section data-background-image="assets/backgrounds/4ecac603fe80d007db6fcca0e7ab0263.jpg">
             <div class="content-box">
                 <h2>The Batman Mode&#8482; Metaphor</h2>
@@ -116,6 +129,45 @@
                     <em>Software engineers</em> should <strong>never</strong> have to go into Batman Mode&#8482; to investigate comments!
                 </p>
             </div>
+        </section>
+
+        <section>
+            <h2>Clarifying(?) Declaration</h2>
+            <pre><code class="fragment" data-trim>
+/**
+ * setzt menOCom, 0 = Mensch, 1 = Computer
+ *
+ * @param int fuer menOCom
+ */
+            </code></pre>
+            <pre><code data-trim>
+public void setmenOCom(int a) {
+  this.menOCom = a;
+}
+            </code></pre>
+            <div class="fragment">
+                <img data-src="assets/30121633.jpg" style="position: absolute; top: 80px; right: 30px;">
+            </div>
+        </section>
+
+        <section>
+            <h2>Reveal your Intent!</h2>
+            <pre><code data-trim>
+import static PlayerType.*;
+// ...
+player1.setPlayerType(HUMAN);
+player2.setPlayerType(COMPUTER);
+// ...
+            </code></pre>
+            <pre><code data-trim>
+public void setPlayerType(PlayerType type) {
+  this.type = type;
+}
+
+public enum PlayerType {
+  HUMAN, COMPUTER
+}
+            </code></pre>
         </section>
 
         <section>
