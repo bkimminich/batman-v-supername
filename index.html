@@ -171,7 +171,88 @@ public enum PlayerType {
         </section>
 
         <section>
+            <h2>Any ideas what these are?</h2>
+            <pre><code class="fragment" data-trim>
+/** The Indirect to Direct Map */
+            </code></pre>
+            <pre><code data-trim>
+protected Map&lt;K, Object&gt; itod;
+            </code></pre>
+            <pre><code class="fragment" data-trim>
+/** The Direct to Indirect Map */
+            </code></pre>
+            <pre><code data-trim>
+protected Map&lt;Object, K&gt; dtoi;
+            </code></pre>
+            <div class="fragment">
+                <img data-src="assets/batman-movies-logo-vector.png" style="border: none; box-shadow: none; position: absolute; top: 80px; right: 30px; background: none;">
+            </div>
+        </section>
+
+        <section>
             <h1>Meaning</h1>
+        </section>
+
+        <section>
+            <h2>What might these services do?</h2>
+            <img data-src="assets/levelSearchService_uml.png">
+            <div class="fragment">
+                <img data-src="assets/batman-movies-logo-vector.png" style="border: none; box-shadow: none; position: absolute; top: 130px; right: 30px; background: none;">
+            </div>
+        </section>
+
+        <section>
+            <h2>Javadoc to the rescue!</h2>
+            <pre class="fragment"><code data-trim>
+/**
+ * level search service
+ *
+ * @author [censored]
+/*
+public class LevelSearchService {...}
+            </code></pre>
+            <small class="fragment">Sidenote: This is a perfect <span style="background: rgb(234, 234, 234); color: black">&nbsp;White Belt&nbsp;</span><span style="background: rgba(103, 103, 103, 1)">&nbsp;Skill Level&nbsp;</span> example for the art of <a href="http://no-comments.kimminich.de/#/39">UnCamelCasing</a>!</small>
+        </section>
+
+        <section>
+            <h2>Maybe in the subclasses?</h2>
+            <pre class="fragment"><code data-trim>
+/**
+ * This service provides methods for the Level-1 Shipment search.
+ *
+ * @author [censored]
+/*
+public class FirstLevelSearchService extends LevelSearchService {...}
+            </code></pre>
+            <pre class="fragment"><code data-trim>
+/**
+ * This service provides methods for the Level-2 Shipment search.
+ *
+ * @author [censored]
+/*
+public class SecondLevelSearchService extends LevelSearchService {...}
+            </code></pre>
+            <small class="fragment">Sidenote: These are more advanced <span style="background: rgb(102, 234, 104); color: black">&nbsp;Green Belt&nbsp;</span><span style="background: rgba(103, 103, 103, 1)">&nbsp;Skill Level&nbsp;</span> examples for <a href="http://no-comments.kimminich.de/#/39">UnCamelCasing</a>!</small>
+        </section>
+
+        <section>
+            <h2>Let me explain...</h2>
+            <blockquote class="fragment">
+                At Kuehne + Nagel the search for <strong>publicly visible tracking information</strong> of shipments is often call <strong>First Level</strong> Search.
+            </blockquote>
+            <blockquote class="fragment">
+                The search for <strong>more detailed (and sensitive) information</strong> (which requires authentication) we often call <strong>Second Level</strong> Search.
+            </blockquote>
+            <small class="fragment">These are by no means official logistics terms! They are not even used corporate-wide in Kuehne + Nagel!</small>
+        </section>
+
+        <section>
+            <h2>Say what you mean!</h2>
+            <pre><code data-trim>
+public class PublicTrackingShipmentSearchService extends ShipmentSearchService {...}
+
+public class FullVisibilityShipmentSearchService extends ShipmentSearchService {...}
+            </code></pre>
         </section>
 
         <section>
@@ -184,6 +265,17 @@ public enum PlayerType {
 
         <section>
             <h1>l0O1</h1>
+        </section>
+
+        <section>
+            <h2>l0O1 are horrible to distinguish</h2>
+            <pre><code data-trim>
+int a = l;
+if (O == l)
+  a = 0l;
+else
+  l = 01;
+            </code></pre>
         </section>
 
         <section data-background-image="assets/backgrounds/giphy_joker.gif">
