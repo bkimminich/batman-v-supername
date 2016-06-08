@@ -266,7 +266,23 @@ public class FullVisibilityShipmentSearchService extends ShipmentSearchService {
         </section>
 
         <section>
-            <h2 style="color: darkred;">TODO</h2>
+            <h3>Entrenched v Intended Meaning</h3>
+            <pre><code data-trim>
+private final ?????????????????? ssd;
+private final ???????????? sd;
+private final ????????????? cd;
+            </code></pre>
+            <span class="fragment"><img data-src="assets/ssd.png" height="150"><img data-src="assets/sd-card.png" height="150"><img data-src="assets/compact_disc_PNG8737.png" height="150"></span>
+        </section>
+
+        <section>
+            <h3>Entrenched v Intended Meaning</h3>
+            <pre><code data-trim>
+private final IShipmentSearchDao ssd;
+private final IShipmentDao sd;
+private final IContainerDao cd;
+            </code></pre>
+            <img data-src="assets/ssd_bent.png" height="150"><img data-src="assets/sd-card_bent.png" height="150"><img data-src="assets/compact_disc_PNG8737_bent.png" height="150">
         </section>
 
         <section>
@@ -290,6 +306,9 @@ if (O == l)
 else
   l = 01;
             </code></pre>
+            <div class="fragment">
+                <img data-src="assets/batman-movies-logo-vector.png" style="border: none; box-shadow: none; position: absolute; top: 80px; right: 30px; background: none;">
+            </div>
         </section>
 
         <section>
@@ -297,7 +316,10 @@ else
         </section>
 
         <section>
-            <h2 style="color: darkred;">TODO</h2>
+            <h2><code>IUgly</code> &amp; <code>IUnnecessary</code></h2>
+            <p>
+                Never put an "<code>I</code>" in front of your interface names!
+            </p>
         </section>
 
         <section>
@@ -305,7 +327,61 @@ else
         </section>
 
         <section>
-            <h2 style="color: darkred;">TODO</h2>
+            <h2>Redundant Context Noise</h2>
+            <pre><code data-trim>
+de.nordakademie.pla.actionblocks.ActionAction
+de.nordakademie.pla.actionblocks.ActionBlock
+de.nordakademie.pla.actionblocks.ActionCard
+de.nordakademie.pla.actionblocks.ActionDamage
+de.nordakademie.pla.actionblocks.ActionDiscard
+de.nordakademie.pla.actionblocks.ActionEvaluate
+de.nordakademie.pla.actionblocks.ActionLevel
+de.nordakademie.pla.actionblocks.ActionResource
+de.nordakademie.pla.actionblocks.ActionSpecial_Blood
+de.nordakademie.pla.actionblocks.ActionSpecial_Flood
+de.nordakademie.pla.actionblocks.ActionSpecial_LuckyFind
+de.nordakademie.pla.actionblocks.ActionSpecial_Parity
+de.nordakademie.pla.actionblocks.ActionSpecial_PureMagic
+de.nordakademie.pla.actionblocks.ActionSpecial_Raise
+de.nordakademie.pla.actionblocks.ActionSpecial_Santa
+de.nordakademie.pla.actionblocks.ActionSpecial_Shift
+de.nordakademie.pla.actionblocks.ActionSpecial_Smith
+de.nordakademie.pla.actionblocks.ActionSpecial_Spy
+de.nordakademie.pla.actionblocks.ActionSpecial_Thief
+            </code></pre>
+            <small>
+                &nbsp;
+                &nbsp;
+            </small>
+        </section>
+
+        <section>
+            <h2>After Renaming/Relocation</h2>
+            <pre><code data-trim>
+de.nordakademie.pla.actions.Action
+de.nordakademie.pla.actions.Block
+de.nordakademie.pla.actions.Card
+de.nordakademie.pla.actions.Damage
+de.nordakademie.pla.actions.Discard
+de.nordakademie.pla.actions.Evaluate
+de.nordakademie.pla.actions.Level
+de.nordakademie.pla.actions.Resource
+de.nordakademie.pla.actions.special.Blood
+de.nordakademie.pla.actions.special.Flood
+de.nordakademie.pla.actions.special.LuckyFind
+de.nordakademie.pla.actions.special.Parity
+de.nordakademie.pla.actions.special.PureMagic
+de.nordakademie.pla.actions.special.Raise
+de.nordakademie.pla.actions.special.Santa
+de.nordakademie.pla.actions.special.Shift
+de.nordakademie.pla.actions.special.Smith
+de.nordakademie.pla.actions.special.Spy
+de.nordakademie.pla.actions.special.Thief
+            </code></pre>
+            <small class="fragment">
+                Note: The sub-package <code>pla</code> is not very clear either, but if you have no idea what it means, just leave it as is.
+                Never let an unanswered question like this stop you from doing small-step improvements in the code you understood!
+            </small>
         </section>
 
         <section>
@@ -313,7 +389,83 @@ else
         </section>
 
         <section>
-            <h2 style="color: darkred;">TODO</h2>
+            <h3>Many Words for one Concept</h3>
+            <pre><code data-trim>
+interface BatComputer {
+  BatReport&lt;Chemical&gt; analyseChemical(Chemical chemical);
+  BatReport&lt;Explosive&gt; analyzeExplosive(Explosive explosive);
+  BatReport&lt;Tissue&gt; dissectTissue(Tissue tissue);
+  BatReport&lt;Fingerprint&gt; parseFingerprint(Fingerprint fingerprint);
+}
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Pick one Word per Concept</h3>
+            <pre><code data-trim>
+interface BatComputer {
+  BatReport&lt;Chemical&gt; analyzeChemical(Chemical chemical);
+  BatReport&lt;Explosive&gt; analyzeExplosive(Explosive explosive);
+  BatReport&lt;Tissue&gt; analyzeTissue(Tissue tissue);
+  BatReport&lt;Fingerprint&gt; analyzeFingerprint(Fingerprint fingerprint);
+}
+            </code></pre>
+            <div>
+                <img data-src="assets/5481b58f1a67341599ad75934639ce60.jpg" style="position: absolute; top: 90px; right: -80px;">
+            </div>
+        </section>
+
+        <section>
+            <h3>One Word for two Purposes</h3>
+            <pre><code data-trim>
+interface BatComputer {
+  BatReport&lt;Chemical&gt; analyzeChemical(Chemical chemical);
+  BatReport&lt;Explosive&gt; analyzeExplosive(Explosive explosive);
+  BatReport&lt;Tissue&gt; analyzeTissue(Tissue tissue);
+  BatReport&lt;Fingerprint&gt; analyzeFingerprint(Fingerprint fingerprint);
+
+  boolean analyzeBatPhoneOnHook(BatPhone phone);
+  boolean analyzeBatCapeIroned(BatCape cape);
+  double analyzeBatMobileGasoline(BatMobile car);
+  int analyzeBatCopterKerosene(BatCopter helicopter);
+}
+            </code></pre>
+    </section>
+
+        <section>
+            <h3>Two Words for two Purposes</h3>
+            <pre><code data-trim>
+interface BatComputer {
+  BatReport&lt;Chemical&gt; analyzeChemical(Chemical chemical);
+  BatReport&lt;Explosive&gt; analyzeExplosive(Explosive explosive);
+  BatReport&lt;Tissue&gt; analyzeTissue(Tissue tissue);
+  BatReport&lt;Fingerprint&gt; analyzeFingerprint(Fingerprint fingerprint);
+
+  boolean monitorBatPhoneOnHook(BatPhone phone);
+  boolean monitorBatCapeIroned(BatCape cape);
+  double monitorBatMobileGasoline(BatMobile car);
+  int monitorBatCopterKerosene(BatCopter helicopter);
+}
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Even better: Split by Responsibility</h3>
+            <pre><code data-trim>
+interface BatComputer {
+  BatReport&lt;Chemical&gt; analyzeChemical(Chemical chemical);
+  BatReport&lt;Explosive&gt; analyzeExplosive(Explosive explosive);
+  BatReport&lt;Tissue&gt; analyzeTissue(Tissue tissue);
+  BatReport&lt;Fingerprint&gt; analyzeFingerprint(Fingerprint fingerprint);
+}
+
+interface BatMonitor {
+  boolean monitorBatPhoneOnHook(BatPhone phone);
+  boolean monitorBatCapeIroned(BatCape cape);
+  double monitorBatMobileGasoline(BatMobile car);
+  int monitorBatCopterKerosene(BatCopter helicopter);
+}
+            </code></pre>
         </section>
 
         <section>
