@@ -189,12 +189,6 @@ protected Map&lt;Object, K&gt; dtoi;
             </div>
         </section>
 
-        <section data-background-image="assets/backgrounds/giphy_joker.gif">
-            <div class="content-box">
-                <h2>You think this is funny?</h2>
-            </div>
-        </section>
-
         <section>
             <h1>Meaning</h1>
         </section>
@@ -244,7 +238,7 @@ public class SecondLevelSearchService extends LevelSearchService {...}
         <section>
             <h2>Let me explain...</h2>
             <blockquote class="fragment">
-                At Kuehne + Nagel the search for <strong>publicly visible tracking information</strong> of shipments is often call <strong>First Level</strong> Search.
+                At Kuehne + Nagel the search for <strong>publicly visible tracking information</strong> of shipments is often called <strong>First Level</strong> Search.
             </blockquote>
             <blockquote class="fragment">
                 The search for <strong>more detailed (and sensitive) information</strong> (which requires authentication) we often call <strong>Second Level</strong> Search.
@@ -266,23 +260,63 @@ public class FullVisibilityShipmentSearchService extends ShipmentSearchService {
         </section>
 
         <section>
-            <h3>Entrenched v Intended Meaning</h3>
+            <h3><span class="fragment highlight-red" data-fragment-index="1">Entrenched</span> v Intended Meaning</h3>
             <pre><code data-trim>
 private final ?????????????????? ssd;
 private final ???????????? sd;
 private final ????????????? cd;
             </code></pre>
-            <span class="fragment"><img data-src="assets/ssd.png" height="150"><img data-src="assets/sd-card.png" height="150"><img data-src="assets/compact_disc_PNG8737.png" height="150"></span>
+            <span class="fragment" data-fragment-index="1"><img data-src="assets/ssd.png" height="150" style="border: none; box-shadow: none; background: none;"><img data-src="assets/sd-card.png" height="150" style="border: none; box-shadow: none; background: none;"><img data-src="assets/compact_disc_PNG8737.png" height="150" style="border: none; box-shadow: none; background: none;"></span>
         </section>
 
         <section>
-            <h3>Entrenched v Intended Meaning</h3>
+            <h3>Entrenched v <span style="color: red">Intended</span> Meaning</h3>
             <pre><code data-trim>
 private final IShipmentSearchDao ssd;
 private final IShipmentDao sd;
 private final IContainerDao cd;
             </code></pre>
-            <img data-src="assets/ssd_bent.png" height="150"><img data-src="assets/sd-card_bent.png" height="150"><img data-src="assets/compact_disc_PNG8737_bent.png" height="150">
+            <img data-src="assets/transparent_pixel.png" height="150" style="border: none; box-shadow: none; background: none;">
+        </section>
+
+        <section>
+            <h3>Abbreviations <strong>always</strong> fail at some point</h3>
+            <pre><code data-trim>
+private final IShipmentSearchDao ssd;
+private final IShipmentDao sd;
+private final IContainerSearchDao csd;
+private final IContainerDao cd;
+private final IShipmentStatusSearchDao sstsd;
+private final IShipmentStatusDao sstd;
+private final ISpecialShipmentSearchDao spssd;
+private final ISpecialShipmentDao spsd;
+private final IStatusSearchDao stsd;
+private final IStatusDao std;
+            </code></pre>
+        </section>
+
+        <section data-background-image="assets/backgrounds/giphy_joker.gif">
+            <div class="content-box">
+                <h2>You think this is funny?</h2>
+            </div>
+        </section>
+
+        <section data-background-image="assets/backgrounds/giphy_riddler.gif">
+            <div class="content-box">
+                <h2>Then you shouldn't mind a serious question!</h2>
+            </div>
+        </section>
+
+        <section>
+            <h3>Of what type is <code>sstd</code>?</h3>
+            <p>Please <strong>silently</strong> raise your hand if you remember!</p>
+            <h2 class="fragment"><code>IShipmentStatusDao</code></h2>
+        </section>
+
+        <section data-background-image="assets/backgrounds/BdvtV3f.gif">
+            <div class="content-box">
+                <h2>Who's laughing now?</h2>
+            </div>
         </section>
 
         <section>
@@ -290,7 +324,30 @@ private final IContainerDao cd;
         </section>
 
         <section>
-            <h2 style="color: darkred;">TODO</h2>
+            <h2>No Language Mashups</h2>
+            <pre><code data-trim>
+private void maxFourEqualValues(int[] werte) {
+  int testValue = werte[0];
+  int equalValues = 1;
+
+  for (int i = 1; i < 7; i++) {
+    if (testValue == werte[i]) {
+      equalValues++;
+    } else {
+      equalValues = 1;
+      testValue = werte[i];
+    }
+    if (equalValues == 5) {
+      throw new IllegalArgumentException(
+            "Ein Wert wurde häufiger als 4x übergeben.
+            + Betroffener Wert: " + testValue);
+    }
+  }
+}
+            </code></pre>
+            <div class="fragment">
+                <img data-src="assets/30121633.jpg" style="position: absolute; top: 90px; right: 0px;">
+            </div>
         </section>
 
         <section>
@@ -316,9 +373,36 @@ else
         </section>
 
         <section>
+            <h2>Hungarian Notation...</h2>
+            <p>
+                ...should be extinct by now. But just to be sure:
+            </p>
+            <pre><code data-trim>
+boolean bBusyFightingCrime;
+boolean fBusyFightingCrime; // flag
+int cBatGadgets; // count of items
+float fpBatMobileMaxSpeed; // floating point
+SuperVillain[] rgVillains; // range
+            </code></pre>
+            <div class="fragment">
+                <img data-src="assets/batman-movies-logo-vector.png" style="border: none; box-shadow: none; position: absolute; top: 130px; right: 0px; background: none;">
+            </div>
+        </section>
+
+        <section>
             <h2><code>IUgly</code> &amp; <code>IUnnecessary</code></h2>
             <p>
                 Never put an "<code>I</code>" in front of your interface names!
+            </p>
+        </section>
+
+        <section>
+            <h2>Rationale against the "<code>I</code>"</h2>
+            <p>
+                It visually mutilates the type you probably <strong>use most</strong> in your code!
+                <br><br>
+                <small>If it can't be avoided prefer to mutilate the implementation type with a "<code>Default</code>"-prefix or "<code>Impl</code>"-suffix instead.
+                because you should <strong>only use it once</strong> during instantiation!</small>
             </p>
         </section>
 
@@ -398,6 +482,9 @@ interface BatComputer {
   BatReport&lt;Fingerprint&gt; parseFingerprint(Fingerprint fingerprint);
 }
             </code></pre>
+            <div class="fragment">
+                <img data-src="assets/batman-movies-logo-vector.png" style="border: none; box-shadow: none; position: absolute; top: 130px; right: 0px; background: none;">
+            </div>
         </section>
 
         <section>
@@ -430,6 +517,9 @@ interface BatComputer {
   int analyzeBatCopterKerosene(BatCopter helicopter);
 }
             </code></pre>
+            <div class="fragment">
+                <img data-src="assets/batman-movies-logo-vector.png" style="border: none; box-shadow: none; position: absolute; top: 150px; right: 0px; background: none;">
+            </div>
     </section>
 
         <section>
@@ -447,6 +537,9 @@ interface BatComputer {
   int monitorBatCopterKerosene(BatCopter helicopter);
 }
             </code></pre>
+            <div>
+                <img data-src="assets/5481b58f1a67341599ad75934639ce60.jpg" style="position: absolute; top: 90px; right: 20px;" width="250">
+            </div>
         </section>
 
         <section>
@@ -466,6 +559,12 @@ interface BatMonitor {
   int monitorBatCopterKerosene(BatCopter helicopter);
 }
             </code></pre>
+            <div>
+                <img data-src="assets/5481b58f1a67341599ad75934639ce60.jpg" style="position: absolute; top: 90px; right: 20px;" width="250">
+            </div>
+            <div>
+                <img data-src="assets/batech4.jpg" style="position: absolute; top: 300px; right: 160px;" width="250">
+            </div>
         </section>
 
         <section>
@@ -543,7 +642,7 @@ interface BatMonitor {
                 <h2>Thanks for your attention...</h2>
                 <small>
                     <ul>
-                        <li class="fragment">...and for <strong>using good names</strong> throughout all your code!</li>
+                        <li class="fragment">...and for <strong>thinking about good names</strong> for everything in your code!</li>
                         <li class="fragment">...and for <strong>renaming badly named things</strong> when you deciphered their meaning!</li>
                         <li class="fragment">...and for <strong>talking about unweird topics</strong> while having lunch when normal people are around!</li>
                     </ul>
@@ -558,10 +657,11 @@ interface BatMonitor {
                     and <a href="http://slideshare.net/BjrnKimminich">Slideshare</a>.
                     <hr>
                     <small>
-                      Most code examples shown in this presentation are from real-life project code. The <code>@author</code> tags or other
-                      personal data have been anonymized in order to protect the authors from prosecution by Clean Code zealots or other Quality Assurance
-                      authorities. No software engineers were harmed during or after the creation of this presentation! Please consider the environment
-                      before printing this slide deck! It contains some animated GIFs which do not work so well on paper anyway...
+                      Most code examples shown in this presentation are from real-life project code. The <code>BatComputer</code> example definitely isn't. All
+                      <code>@author</code> tags or other personal data have been anonymized in order to protect the authors from prosecution by Clean
+                      Code zealots or other Quality Assurance authorities. No software engineers were harmed during or after the creation of this
+                      presentation! Please consider the environment before printing this slide deck! It contains many animated GIFs which do not work
+                      so well on paper anyway...
                     </small>
                     &nbsp;
                 </small>
