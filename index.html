@@ -572,7 +572,95 @@ interface BatMonitor {
         </section>
 
         <section>
-            <h2 style="color: darkred;">TODO</h2>
+            <h2>Scope Rule for Methods</h2>
+            <ul>
+                <li>Long Scope = Short and evocative Names</li>
+                <li>Short Scope = Long and precise Names</li>
+            </ul>
+            <br><br>
+            <small>You should not have to read the body of a method to know what it does - its name should tell you.</small>
+        </section>
+
+        <section>
+            <h3>Long Method Scope</h3>
+            <h1 style="color: red">TODO</h1>
+        </section>
+
+        <section>
+            <h3>Short Method Scope</h3>
+            <h1 style="color: red">TODO</h1>
+        </section>
+
+        <section>
+            <h2>Scope Rule for Variables</h2>
+            <ul>
+                <li>Long/Global Scope = Long and self-explaining Names</li>
+                <li>Short/Local Scope = Long or short Names</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Which Variables need renaming?</h3>
+            <pre><code data-trim>
+public class JAsteroids extends AbstractGame {
+  static int FRAMERATE = 60;
+  static int HEIGHT = 600;
+  static int WIDTH = 800;
+  static Dimension SIZE = new Dimension(WIDTH, HEIGHT);
+  static boolean SHOW_FPS = true;
+
+  private static final double ACC = 0.05;
+  private static final double MAX_ACC = 5.0;
+  private static final int BULLET_SPEED = 4;
+  private static final double ROTATION = 5.0;
+  private static final long DEFAULT_INV_TIME = 3000;
+
+  private static final int NORMAL = 0;
+  private static final int INV = 1;
+  private static final int MEGA_SHIELD = 2;
+
+  // ... ~1700 lines of game code
+}
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Long Variable Scope = Long Names</h3>
+            <pre><code data-trim>
+public class JAsteroids extends AbstractGame {
+  static int FRAMERATE = 60;
+  static int SCREEN_HEIGHT = 600;
+  static int SCREEN_WIDTH = 800;
+  static Dimension SCREEN_SIZE = new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT);
+  static boolean SHOW_FRAMERATE = true;
+
+  private static final double ACCELERATION = 0.05;
+  private static final double MAX_ACCELERATION = 5.0;
+  private static final int BULLET_SPEED = 4;
+  private static final double SHIP_ROTATION = 5.0;
+  private static final long DEFAULT_INVULNERABLE_TIME = 3000;
+
+  private static final int STATE_NORMAL = 0;
+  private static final int STATE_INVULNERABLE = 1;
+  private static final int STATE_MEGA_SHIELD = 2;
+
+  // ... ~1700 lines of game code
+}
+            </code></pre>
+            <small>Sidenote: Over 1700 LOC is a <em>very large</em> scope. <code>JAsteroids</code> might need more refactorings than just renaming...</small>
+        </section>
+
+        <section>
+            <h3>Short Variable Scope</h3>
+            <h1 style="color: red">TODO</h1>
+        </section>
+
+        <section>
+            <h1>Newspaper Metaphor</h1>
+        </section>
+
+        <section>
+            <h1 style="color: red">TODO</h1>
         </section>
 
         <section data-background-image="assets/backgrounds/tumblr_lm1s18wscw1qgqkw9o1_500.gif">
