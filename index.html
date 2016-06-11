@@ -582,20 +582,121 @@ interface BatMonitor {
         </section>
 
         <section>
-            <h3>Long Method Scope</h3>
-            <h1 style="color: red">TODO</h1>
+            <h3>Too verbose for Long Method Scope</h3>
+            <pre><code data-trim>
+/**
+ * This service handles the storage and retrieval of the data used my the netsurvey dialogs.
+/*
+public interface NetsurveyService extends Service {
+  Long saveNewNetsurveyRun(NetsurveyRunDts netsurveyRun);
+  void updateContentEncoding4NetsurveyRun(String contentEncoding, Long id);
+  // ...
+}
+            </code></pre>
+            <small>Assumption: This interface is part of a public service API.</small>
         </section>
 
         <section>
-            <h3>Short Method Scope</h3>
-            <h1 style="color: red">TODO</h1>
+            <h3>Evocative Names for Long Method Scope</h3>
+            <pre><code data-trim>
+/**
+ * This service handles the storage and retrieval of the data used my the netsurvey dialogs.
+/*
+public interface NetsurveyService extends Service {
+  Long create(NetsurveyRunDts netsurveyRun);
+  void updateContentEncoding(String encoding, Long netSurveyRunId);
+  // ...
+}
+            </code></pre>
+            <small>Sidenote: Sometimes you can move some verbosity from a method name into a parameter name.</small>
+        </section>
+
+        <section>
+            <h3>Tests should have Short Scopes...</h3>
+            <pre><code data-trim>
+@Test
+void testDamage() {
+  bot = aBot().withIntegrity(100).withArmor(10).build();
+
+  bot.takeDamage(20);
+  assertEquals(90, bot.getIntegrity());
+
+  bot.takeDamage(60);
+  assertEquals(40, bot.getIntegrity());
+
+  bot.takeDamage(5);
+  assertEquals(40, bot.getIntegrity(), "Armor will not reduce damage below zero");
+
+  bot.takeDamage(9999);
+  assertEquals(0, bot.getIntegrity(), "Integrity cannot drop below zero");
+}
+            </code></pre>
+            <div class="fragment">
+                <img data-src="assets/batman-movies-logo-vector.png" style="border: none; box-shadow: none; position: absolute; top: 70px; right: 50px; background: none;">
+            </div>
+        </section>
+
+        <section>
+            <h3>...and therefore Long (and Precise) Names</h3>
+            <pre><code data-trim>
+@Test
+void damageTakenIsReducedByArmorAndIntegrityCannotDropBelowZero() {
+  bot = aBot().withIntegrity(100).withArmor(10).build();
+
+  bot.takeDamage(20);
+  assertEquals(90, bot.getIntegrity());
+
+  bot.takeDamage(60);
+  assertEquals(40, bot.getIntegrity());
+
+  bot.takeDamage(5);
+  assertEquals(40, bot.getIntegrity(), "Armor will not reduce damage below zero");
+
+  bot.takeDamage(9999);
+  assertEquals(0, bot.getIntegrity(), "Integrity cannot drop below zero");
+}
+            </code></pre>
+            <small class="fragment" data-fragment-index="1"><q>"Seriously <code>damageTakenIsReducedByArmorAndIntegrityCannotDropBelowZero()</code>...?!?"</q></small>
+            <div class="fragment" data-fragment-index="1">
+                <img data-src="assets/ba0840f987c98706b10f31984f3afdb3.jpg" style="position: absolute; top: 70px; right: -150px;" width="250">
+            </div>
+        </section>
+
+        <section>
+            <h3>Name is too long = Scope is too long</h3>
+            <pre><code data-trim>
+@Test
+void damageTakenIsReducedByArmor() {
+  bot = aBot().withIntegrity(100).withArmor(10).build();
+
+  bot.takeDamage(20);
+  assertEquals(90, bot.getIntegrity());
+
+  bot.takeDamage(60);
+  assertEquals(40, bot.getIntegrity());
+
+  bot.takeDamage(5);
+  assertEquals(40, bot.getIntegrity(), "Armor will not reduce damage below zero");
+
+@Test
+void integrityCannotDropBelowZero() {
+  bot = aBot().withIntegrity(100).build();
+
+  bot.takeDamage(9999);
+  assertEquals(0, bot.getIntegrity());
+}
+            </code></pre>
+            <small>
+                <q>"Extract till you drop"</q> - You should try to further split up a method to get <em>more</em> <strong>but</strong> <em>smaller</em>
+                scopes which are easier to find names for! For Tests this typically correlates well with the <q>Single Assert</q> rule!
+            </small>
         </section>
 
         <section>
             <h2>Scope Rule for Variables</h2>
             <ul>
                 <li>Long/Global Scope = Long and self-explaining Names</li>
-                <li>Short/Local Scope = Long or short Names</li>
+                <li>Short/Local Scope = Short and reasonable Names</li>
             </ul>
         </section>
 
@@ -622,6 +723,7 @@ public class JAsteroids extends AbstractGame {
   // ... ~1700 lines of game code
 }
             </code></pre>
+            <small>&nbsp;</small>
         </section>
 
         <section>
@@ -652,7 +754,38 @@ public class JAsteroids extends AbstractGame {
 
         <section>
             <h3>Short Variable Scope</h3>
-            <h1 style="color: red">TODO</h1>
+            <ul>
+                <li>Short names are allowed in a Short Scope...</li>
+                <li class="fragment">...but they must still be reasonably easy to understand...</li>
+                <li class="fragment">...so don't go overboard with <a href="#/16">crazy abbreviations</a>!</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>1-or-2-Letter Names...</h3>
+            <p>...can be tolerated as Counter Variables or Exception Instances:</p>
+            <pre><code data-trim>
+for (int i = 0; i < villains.length; i++) {
+  try {
+    gordon.arrest(villains[i]);
+  } catch (TooSmartToBeCaughtByPoliceException ex) {
+    gordon.callForHelp(ex.getMessage(), batman, robin);
+  }
+}
+            </code></pre>
+            <p class="fragment" data-fragment-index="1">...but <strong>never</strong> elsewhere!</p>
+            <pre class="fragment" data-fragment-index="1"><code data-trim>
+for (int i = 0; i < v.length; i++) {
+  try {
+    g.arrest(v[i]);
+  } catch (TooSmartToBeCaughtByPoliceException ex) {
+    g.callForHelp(ex.getMessage(), b, r);
+  }
+}
+            </code></pre>
+            <div class="fragment" data-fragment-index="1">
+                <img data-src="assets/ba0840f987c98706b10f31984f3afdb3.jpg" style="position: absolute; top: 300px; right: 100px;" width="200">
+            </div>
         </section>
 
         <section>
@@ -725,7 +858,8 @@ public class JAsteroids extends AbstractGame {
             </p>
         </section>
 
-        <section>
+        <section data-autoslide="30000">
+            <h2>30, 29, 28, 27, ...<span class="fragment" data-fragment-index="1" data-autoslide="1000">, 0!</span></h2>
             <pre><code data-trim>
 public void handleSendPlanCommand() {
   final IdpDeliveryPlanDts deliveryPlan = getTimetableView().getDeliveryPlan();
@@ -748,14 +882,11 @@ public void handleSendPlanCommand() {
   }
 }
             </code></pre>
-            <div class="fragment">
-                <img data-src="assets/batman-movies-logo-vector.png" style="border: none; box-shadow: none; position: absolute; top: 0px; right: 0px; background: none;" width="100%">
-            </div>
         </section>
 
         <section data-background-image="assets/backgrounds/batman-old-school-logo-tv-series-gif.gif ">
             <div class="content-box">
-                <h2>Please view this animation for a few seconds to get distracted...</h2>
+                <h2>Please view this hypnotizing animation for a few seconds...</h2>
             </div>
         </section>
 
@@ -818,32 +949,32 @@ public void handleSendPlanCommand() {
             </p>
         </section>
 
-        <section>
-            <h1><span class="fragment highlight-red">Swot</span><span class="fragment highlight-red">Service</span></h1>
+        <section data-autoslide="1000">
+            <h1><span class="fragment highlight-red">Swot</span><span class="fragment highlight-red" data-autoslide="0">Service</span></h1>
         </section>
 
         <section>
             <img data-src="assets/K35BDKR003_1.png">
         </section>
 
-        <section>
-            <h1><span class="fragment highlight-red">Kn</span><span class="fragment highlight-red">lobi</span><span class="fragment highlight-red">Location</span></h1>
+        <section data-autoslide="1000">
+            <h1><span class="fragment highlight-red">Kn</span><span class="fragment highlight-red">lobi</span><span class="fragment highlight-red" data-autoslide="0">Location</span></h1>
         </section>
 
-        <section>
-            <h2><span class="fragment highlight-red">Segment</span><span class="fragment highlight-red">G041</span><span class="fragment highlight-red">Data</span></h2>
+        <section data-autoslide="1000">
+            <h2><span class="fragment highlight-red">Segment</span><span class="fragment highlight-red">G041</span><span class="fragment highlight-red" data-autoslide="0">Data</span></h2>
         </section>
 
-        <section>
-            <h3><span class="fragment highlight-red">Dx2</span><span class="fragment highlight-red">Fltr</span><span class="fragment highlight-red">Shipment</span><span class="fragment highlight-red">Cust</span><span class="fragment highlight-red">Party</span><span class="fragment highlight-red">X</span><span class="fragment highlight-red">Dto</span></h3>
+        <section data-autoslide="1000">
+            <h3><span class="fragment highlight-red">Dx2</span><span class="fragment highlight-red">Fltr</span><span class="fragment highlight-red">Shipment</span><span class="fragment highlight-red">Cust</span><span class="fragment highlight-red">Party</span><span class="fragment highlight-red">X</span><span class="fragment highlight-red" data-autoslide="0">Dto</span></h3>
         </section>
 
-        <section>
-            <h3><span class="fragment highlight-red">Base</span><span class="fragment highlight-red">Dxo</span><span class="fragment highlight-red">Process</span><span class="fragment highlight-red">Milestone</span><span class="fragment highlight-red">7600</span><span class="fragment highlight-red">Lst</span><span class="fragment highlight-red">Bo</span></h3>
+        <section data-autoslide="1000">
+            <h3><span class="fragment highlight-red">Base</span><span class="fragment highlight-red">Dxo</span><span class="fragment highlight-red">Process</span><span class="fragment highlight-red">Milestone</span><span class="fragment highlight-red">7600</span><span class="fragment highlight-red">Lst</span><span class="fragment highlight-red" data-autoslide="0">Bo</span></h3>
         </section>
 
-        <section>
-            <h2><span class="fragment highlight-red">Gyq</span><span class="fragment highlight-red">fa</span><span class="fragment highlight-red">Ch</span><span class="fragment highlight-red">Bpp</span><span class="fragment highlight-red">Res</span><span class="fragment highlight-red">Dao</span></h2>
+        <section data-autoslide="1000">
+            <h2><span class="fragment highlight-red">Gyq</span><span class="fragment highlight-red">fa</span><span class="fragment highlight-red">Ch</span><span class="fragment highlight-red">Bpp</span><span class="fragment highlight-red">Res</span><span class="fragment highlight-red" data-autoslide="0">Dao</span></h2>
         </section>
 
         <section>
