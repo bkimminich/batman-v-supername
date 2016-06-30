@@ -590,8 +590,8 @@ interface BatMonitor {
             <h3>Too verbose for Long Method Scope</h3>
             <pre><code data-trim>
 /**
- * This service handles the storage and retrieval of the data used my the netsurvey dialogs.
-/*
+ * This service handles the storage and retrieval of the data used by the netsurvey dialogs.
+ */
 public interface NetsurveyService extends Service {
   Long saveNewNetsurveyRun(NetsurveyRunDts netsurveyRun);
   void updateContentEncoding4NetsurveyRun(String contentEncoding, Long id);
@@ -605,8 +605,8 @@ public interface NetsurveyService extends Service {
             <h3>Evocative Names for Long Method Scope</h3>
             <pre><code data-trim>
 /**
- * This service handles the storage and retrieval of the data used my the netsurvey dialogs.
-/*
+ * This service handles the storage and retrieval of the data used by the netsurvey dialogs.
+ */
 public interface NetsurveyService extends Service {
   Long create(NetsurveyRunDts netsurveyRun);
   void updateEncoding(String contentEncoding, Long netSurveyRunId);
