@@ -404,9 +404,9 @@ SuperVillain[] rgVillains; // range
             <p>
                 It visually mutilates the type you probably <strong>use most</strong> in your code!
                 <br><br>
-                <small>If it can't be avoided, prefer to mutilate the implementation type with a "<code>Default</code>"-prefix or "<code>Impl</code>"-suffix instead.
+                <small>If it can't be avoided, prefer to mutilate the implementation type with an "<code>Impl</code>"-suffix instead.
                 because you should <strong>only use it once</strong> during instantiation! If you only have one implementation for an interface, you might
-                also ask yourself why you created an interface in the first place.</small>
+                also ask yourself <em>why</em> you created an interface in the first place.</small>
             </p>
           </div>
         </section>
@@ -557,11 +557,11 @@ interface BatComputer {
   BatReport&lt;Fingerprint&gt; analyzeFingerprint(Fingerprint fingerprint);
 }
 
-interface BatMonitor {
-  boolean monitorBatPhoneOnHook(BatPhone phone);
-  boolean monitorBatCapeIroned(BatCape cape);
-  double monitorBatMobileGasoline(BatMobile car);
-  int monitorBatCopterKerosene(BatCopter helicopter);
+interface BatStatusMonitor {
+  boolean isBatPhoneOnHook(BatPhone phone);
+  boolean isBatCapeIroned(BatCape cape);
+  double getRemainingBatMobileGasoline(BatMobile car);
+  int getRemainingBatCopterKerosene(BatCopter helicopter);
 }
             </code></pre>
             <div>
