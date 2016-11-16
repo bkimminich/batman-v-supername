@@ -18,3 +18,9 @@ huge positive effects on your code. By choosing *Supernames*™ your team might 
 ## The Prequel
 
 In case you missed the introduction of [The Batman Mode™](http://no-comment.kimminich.de/#/15/1) in the context of comments in source code, you can fill this gap here: http://no-comment.kimminich.de
+
+## Talk History
+
+* [Clean Code Days 2016](http://lanyrd.com/2016/clean-code-days/) - Munich, Germany - 28th–30th June 2016
+* [TopConf Tallinn 2016](http://lanyrd.com/2016/topconfee/) - Tallinn, Estonia - 15th-18th November 2016
+* [JUGHH Java User Group Meetup](http://lanyrd.com/2016/jughh-meetup-30112016/) - Hamburg, Germany - 29th November 2016
